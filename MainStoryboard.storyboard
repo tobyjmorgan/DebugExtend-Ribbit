@@ -61,12 +61,6 @@
                                     <action selector="login:" destination="BA1-Cp-RJu" eventType="touchUpInside" id="LcU-TO-5pp"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Don't have an account?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XUF-nl-vFc">
-                                <rect key="frame" x="20" y="214" width="179" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cZF-ds-FrG">
                                 <rect key="frame" x="268" y="250" width="73" height="44"/>
                                 <constraints>
@@ -85,6 +79,12 @@
                                     <segue destination="EZc-59-qKm" kind="push" id="Qwo-lL-hgI"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Don't have an account?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XUF-nl-vFc">
+                                <rect key="frame" x="20" y="262" width="179" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -93,11 +93,11 @@
                             <constraint firstItem="ZQC-BI-gMf" firstAttribute="leading" secondItem="TnU-aj-axw" secondAttribute="leading" constant="20" symbolic="YES" id="K1v-nY-vU5"/>
                             <constraint firstItem="cZF-ds-FrG" firstAttribute="top" secondItem="TnU-aj-axw" secondAttribute="top" constant="250" id="KFL-r4-ku8"/>
                             <constraint firstItem="NRF-Ak-4Dc" firstAttribute="top" secondItem="TnU-aj-axw" secondAttribute="top" constant="100" id="N03-5a-2lb"/>
+                            <constraint firstItem="XUF-nl-vFc" firstAttribute="baseline" secondItem="cZF-ds-FrG" secondAttribute="baseline" id="Nqc-8t-Obh"/>
                             <constraint firstItem="XUF-nl-vFc" firstAttribute="leading" secondItem="TnU-aj-axw" secondAttribute="leading" constant="20" symbolic="YES" id="V6R-6G-Ibk"/>
                             <constraint firstAttribute="trailing" secondItem="cZF-ds-FrG" secondAttribute="trailing" constant="34" id="Vy0-mi-gZV"/>
                             <constraint firstItem="ZQC-BI-gMf" firstAttribute="top" secondItem="LtO-lO-faO" secondAttribute="bottom" constant="8" symbolic="YES" id="X2G-Ij-0lH"/>
                             <constraint firstItem="LtO-lO-faO" firstAttribute="leading" secondItem="TnU-aj-axw" secondAttribute="leading" constant="20" symbolic="YES" id="bN3-42-ZQG"/>
-                            <constraint firstItem="XUF-nl-vFc" firstAttribute="top" secondItem="ZQC-BI-gMf" secondAttribute="bottom" constant="8" symbolic="YES" id="bnP-Vg-sHI"/>
                             <constraint firstAttribute="trailing" secondItem="ZQC-BI-gMf" secondAttribute="trailing" constant="20" symbolic="YES" id="kww-je-3bh"/>
                             <constraint firstItem="NRF-Ak-4Dc" firstAttribute="leading" secondItem="TnU-aj-axw" secondAttribute="leading" constant="20" symbolic="YES" id="lLg-SX-fCb"/>
                             <constraint firstItem="LtO-lO-faO" firstAttribute="top" secondItem="NRF-Ak-4Dc" secondAttribute="bottom" constant="8" symbolic="YES" id="ygs-IK-S4H"/>
