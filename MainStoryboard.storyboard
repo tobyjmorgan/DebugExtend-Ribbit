@@ -62,7 +62,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Don't have an account?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XUF-nl-vFc">
-                                <rect key="frame" x="20" y="180.5" width="179" height="20.5"/>
+                                <rect key="frame" x="20" y="214" width="179" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -101,7 +101,6 @@
                             <constraint firstAttribute="trailing" secondItem="ZQC-BI-gMf" secondAttribute="trailing" constant="20" symbolic="YES" id="kww-je-3bh"/>
                             <constraint firstItem="NRF-Ak-4Dc" firstAttribute="leading" secondItem="TnU-aj-axw" secondAttribute="leading" constant="20" symbolic="YES" id="lLg-SX-fCb"/>
                             <constraint firstItem="LtO-lO-faO" firstAttribute="top" secondItem="NRF-Ak-4Dc" secondAttribute="bottom" constant="8" symbolic="YES" id="ygs-IK-S4H"/>
-                            <constraint firstItem="XUF-nl-vFc" firstAttribute="baseline" secondItem="ZQC-BI-gMf" secondAttribute="baseline" id="ze2-Xd-d0c"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Ribbit" id="Xza-Tr-b7l"/>
