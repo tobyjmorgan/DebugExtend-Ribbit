@@ -40,7 +40,12 @@ static NSInteger identifier = 1;
 }
 
 - (void)addFriend:(User *)friend {
-  [self.friendsMutable addObject:friend];
+
+    // TJM 1/2/2017 Bug #3 - good precaution to only allow adding friends that have not already been added
+    if (![self.friendsMutable containsObject:friend]) {
+        
+        [self.friendsMutable addObject:friend];
+    }
 }
 
 - (void)removeFriend:(User *)friend {

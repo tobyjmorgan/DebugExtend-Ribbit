@@ -12,6 +12,7 @@
 @interface App()
 
 @property (strong, nonatomic) NSMutableArray *messagesMutable;
+@property (strong, nonatomic) NSArray *internalAllUsers;
 
 @end
 
@@ -24,6 +25,15 @@
   dispatch_once(&onceToken, ^{
     sharedApp = [[self alloc] init];
     sharedApp.messagesMutable = [NSMutableArray array];
+      
+      // TJM 1/2/2017 Bug #3 & Bug #4 - create array once
+      sharedApp.internalAllUsers = @[ [User userWithUsername:@"John"],
+                                      [User userWithUsername:@"Andrew"],
+                                      [User userWithUsername:@"Ben"],
+                                      [User userWithUsername:@"Pasan"],
+                                      [User userWithUsername:@"Amit"],
+                                      [User userWithUsername:@"Craig"],
+                                      [User userWithUsername:@"Alena"]];
   });
   
   return sharedApp;
@@ -42,13 +52,18 @@
 }
 
 - (NSArray *)allUsers {
-  return  @[ [User userWithUsername:@"John"],
-             [User userWithUsername:@"Andrew"],
-             [User userWithUsername:@"Ben"],
-             [User userWithUsername:@"Pasan"],
-             [User userWithUsername:@"Amit"],
-             [User userWithUsername:@"Craig"],
-             [User userWithUsername:@"Alena"]];
+    // TJM 1/2/2017 Bug #3 & Bug #4 - create array once
+    // Returning a different array with equivalent objects each time was confusing the existing code.
+    // By creating the array only once and returning the same array in this method each time, the objects
+    // are correctly identified as already being present in Friends lists etc
+    return self.internalAllUsers;
+//  return  @[ [User userWithUsername:@"John"],
+//             [User userWithUsername:@"Andrew"],
+//             [User userWithUsername:@"Ben"],
+//             [User userWithUsername:@"Pasan"],
+//             [User userWithUsername:@"Amit"],
+//             [User userWithUsername:@"Craig"],
+//             [User userWithUsername:@"Alena"]];
 }
 
 
