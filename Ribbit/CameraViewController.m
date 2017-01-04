@@ -10,6 +10,7 @@
 #import "User.h"
 #import "File.h"
 #import "Message.h"
+#import "UIViewController+ShowErrorAlert.h"
 
 @interface CameraViewController ()
 
@@ -143,10 +144,7 @@
 
 - (IBAction)send:(id)sender {
     if (self.image == nil && [self.videoFilePath length] == 0) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Try again!"
-                                                            message:@"Please capture or select a photo or video to share!"
-                                                           delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alertView show];
+        [self showErrorAlertWithTitle:@"Try again!" andMessage:@"Please capture or select a photo or video to share!"];
         [self presentViewController:self.imagePicker animated:NO completion:nil];
     }
     else {
@@ -177,10 +175,7 @@
     File *file = [File fileWithName:fileName data:fileData];
     [file saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (error) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"An error occurred!"
-                                                                message:@"Please try sending your message again."
-                                                               delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alertView show];
+            [self showErrorAlertWithTitle:@"An error occurred!"  andMessage:@"Please try sending your message again."];
         }
         else {
             Message *message = [[Message alloc] init];
@@ -192,10 +187,7 @@
           
             [message saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (error) {
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"An error occurred!"
-                                                                        message:@"Please try sending your message again."
-                                                                       delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                    [alertView show];
+                    [self showErrorAlertWithTitle:@"An error occurred!"  andMessage:@"Please try sending your message again."];
                 }
                 else {
                     // Everything was successful!

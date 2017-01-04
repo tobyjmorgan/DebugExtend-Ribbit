@@ -8,6 +8,7 @@
 
 #import "SignupViewController.h"
 #import "User.h"
+#import "UIViewController+ShowErrorAlert.h"
 
 @interface SignupViewController ()
 
@@ -27,10 +28,8 @@
     NSString *email = [self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     if ([username length] == 0 || [password length] == 0 || [email length] == 0) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Oops!"
-                                                            message:@"Make sure you enter a username, password, and email address!"
-                                                           delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alertView show];
+        [self showErrorAlertWithTitle:@"Oops!"
+                           andMessage:@"Make sure you enter a username, password, and email address!"];
     }
     else {
         User *newUser = [User currentUser];

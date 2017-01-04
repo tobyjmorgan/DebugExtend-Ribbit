@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "UIViewController+ShowErrorAlert.h"
 
 @interface LoginViewController ()
 
@@ -27,10 +28,7 @@
     NSString *password = [self.passwordField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     if ([username length] == 0 || [password length] == 0) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Oops!"
-                                                            message:@"Make sure you enter a username and password!"
-                                                           delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alertView show];
+        [self showErrorAlertWithTitle:@"Oops!" andMessage:@"Make sure you enter a username and password!"];
     }
     else {
         
