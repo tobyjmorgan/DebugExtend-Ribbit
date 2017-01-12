@@ -11,6 +11,9 @@
 		6BF4F4301E2818DE0073A103 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BF4F42E1E2818DE0073A103 /* AVFoundation.framework */; };
 		6BF4F4311E2818DE0073A103 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BF4F42F1E2818DE0073A103 /* AVKit.framework */; };
 		6BF4F4331E2829760073A103 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BF4F4321E2829760073A103 /* Media.xcassets */; };
+		6BF4F4371E282B240073A103 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BF4F4341E282B240073A103 /* Background.png */; };
+		6BF4F4451E282FB70073A103 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BF4F4441E282FB70073A103 /* LaunchScreen.storyboard */; };
+		6BF4F4471E28300A0073A103 /* LaunchScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BF4F4461E28300A0073A103 /* LaunchScreen.png */; };
 		8D2A01AC17AB0EEE00A43140 /* EditFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D2A01A917AB0EEE00A43140 /* EditFriendsViewController.m */; };
 		8D2A01AD17AB0EEE00A43140 /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D2A01AB17AB0EEE00A43140 /* FriendsViewController.m */; };
 		8D5ED96317AFFE300079548F /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5ED96217AFFE300079548F /* CameraViewController.m */; };
@@ -50,6 +53,9 @@
 		6BF4F42E1E2818DE0073A103 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		6BF4F42F1E2818DE0073A103 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		6BF4F4321E2829760073A103 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		6BF4F4341E282B240073A103 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
+		6BF4F4441E282FB70073A103 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6BF4F4461E28300A0073A103 /* LaunchScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchScreen.png; sourceTree = "<group>"; };
 		8D2A01A817AB0EEE00A43140 /* EditFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditFriendsViewController.h; sourceTree = "<group>"; };
 		8D2A01A917AB0EEE00A43140 /* EditFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditFriendsViewController.m; sourceTree = "<group>"; };
 		8D2A01AA17AB0EEE00A43140 /* FriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsViewController.h; sourceTree = "<group>"; };
@@ -178,6 +184,7 @@
 			children = (
 				6BF4F42D1E1D5C0B0073A103 /* HomeGrown */,
 				8DCDADC817A6BA34008AAA28 /* MainStoryboard.storyboard */,
+				6BF4F4441E282FB70073A103 /* LaunchScreen.storyboard */,
 				8DCDADD617A6BC26008AAA28 /* Images */,
 				B3EB1F091D6DB6DF00B5FDAD /* Model */,
 				8DCDADBA17A6B3CC008AAA28 /* AppDelegate.h */,
@@ -219,6 +226,8 @@
 		8DCDADD617A6BC26008AAA28 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6BF4F4461E28300A0073A103 /* LaunchScreen.png */,
+				6BF4F4341E282B240073A103 /* Background.png */,
 				6BF4F4321E2829760073A103 /* Media.xcassets */,
 			);
 			name = Images;
@@ -297,10 +306,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DCDADB617A6B3CC008AAA28 /* InfoPlist.strings in Resources */,
+				6BF4F4471E28300A0073A103 /* LaunchScreen.png in Resources */,
 				8DCDADBE17A6B3CC008AAA28 /* Default.png in Resources */,
 				8DCDADC017A6B3CC008AAA28 /* Default@2x.png in Resources */,
+				6BF4F4451E282FB70073A103 /* LaunchScreen.storyboard in Resources */,
 				8DCDADC217A6B3CC008AAA28 /* Default-568h@2x.png in Resources */,
 				8DCDADC917A6BA34008AAA28 /* MainStoryboard.storyboard in Resources */,
+				6BF4F4371E282B240073A103 /* Background.png in Resources */,
 				6BF4F4331E2829760073A103 /* Media.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -422,6 +434,7 @@
 		8DCDADC617A6B3CC008AAA28 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 646297YD5V;
@@ -442,6 +455,7 @@
 		8DCDADC717A6B3CC008AAA28 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 646297YD5V;
