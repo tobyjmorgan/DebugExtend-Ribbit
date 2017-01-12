@@ -12,6 +12,10 @@
 #import "App.h"
 #import "File.h"
 
+// TJM 1/12/2017 Bug Fix #5 - replace deprecated MPMoviePlayer with AVPlayerViewController
+#import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVKit.h>
+
 @interface InboxViewController ()
 
 @end
@@ -22,7 +26,8 @@
 {
     [super viewDidLoad];
 
-    self.moviePlayer = [[MPMoviePlayerController alloc] init];
+    // TJM 1/12/2017 Bug Fix #5 - replace deprecated MPMoviePlayer with AVPlayerViewController
+//    self.moviePlayer = [[MPMoviePlayerController alloc] init];
     
     User *currentUser = [User currentUser];
     if (currentUser) {
@@ -89,13 +94,20 @@
     else {
         // File type is video
         File *videoFile = self.selectedMessage.file;
-        self.moviePlayer.contentURL = videoFile.fileURL;
-        [self.moviePlayer prepareToPlay];
-        [self.moviePlayer thumbnailImageAtTime:0 timeOption:MPMovieTimeOptionNearestKeyFrame];
         
-        // Add it to the view controller so we can see it
-        [self.view addSubview:self.moviePlayer.view];
-        [self.moviePlayer setFullscreen:YES animated:YES];
+        // TJM 1/12/2017 Bug Fix #5 - replace deprecated MPMoviePlayer with AVPlayerViewController
+//        self.moviePlayer.contentURL = videoFile.fileURL;
+//        [self.moviePlayer prepareToPlay];
+//        [self.moviePlayer thumbnailImageAtTime:0 timeOption:MPMovieTimeOptionNearestKeyFrame];
+//        
+//        // Add it to the view controller so we can see it
+//        [self.view addSubview:self.moviePlayer.view];
+//        [self.moviePlayer setFullscreen:YES animated:YES];
+        
+        AVPlayer *player = [AVPlayer playerWithURL:videoFile.fileURL];
+        AVPlayerViewController *playerViewController = [[AVPlayerViewController alloc] init];
+        playerViewController.player = player;
+        [self presentViewController:playerViewController animated:YES completion:nil];
     }
     
     // Delete it!

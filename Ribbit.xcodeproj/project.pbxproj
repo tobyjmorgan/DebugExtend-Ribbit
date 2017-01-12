@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6BF4F42C1E1D5C050073A103 /* UIViewController+ShowErrorAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF4F42B1E1D5C040073A103 /* UIViewController+ShowErrorAlert.m */; };
+		6BF4F4301E2818DE0073A103 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BF4F42E1E2818DE0073A103 /* AVFoundation.framework */; };
+		6BF4F4311E2818DE0073A103 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BF4F42F1E2818DE0073A103 /* AVKit.framework */; };
 		8D2A01AC17AB0EEE00A43140 /* EditFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D2A01A917AB0EEE00A43140 /* EditFriendsViewController.m */; };
 		8D2A01AD17AB0EEE00A43140 /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D2A01AB17AB0EEE00A43140 /* FriendsViewController.m */; };
 		8D5ED96317AFFE300079548F /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5ED96217AFFE300079548F /* CameraViewController.m */; };
@@ -54,6 +56,8 @@
 /* Begin PBXFileReference section */
 		6BF4F42A1E1D5C040073A103 /* UIViewController+ShowErrorAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ShowErrorAlert.h"; sourceTree = "<group>"; };
 		6BF4F42B1E1D5C040073A103 /* UIViewController+ShowErrorAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ShowErrorAlert.m"; sourceTree = "<group>"; };
+		6BF4F42E1E2818DE0073A103 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		6BF4F42F1E2818DE0073A103 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		8D2A01A817AB0EEE00A43140 /* EditFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditFriendsViewController.h; sourceTree = "<group>"; };
 		8D2A01A917AB0EEE00A43140 /* EditFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditFriendsViewController.m; sourceTree = "<group>"; };
 		8D2A01AA17AB0EEE00A43140 /* FriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsViewController.h; sourceTree = "<group>"; };
@@ -118,6 +122,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BF4F4301E2818DE0073A103 /* AVFoundation.framework in Frameworks */,
+				6BF4F4311E2818DE0073A103 /* AVKit.framework in Frameworks */,
 				8D5ED97817B04E060079548F /* MediaPlayer.framework in Frameworks */,
 				8DCDADE517A82CE5008AAA28 /* AudioToolbox.framework in Frameworks */,
 				8DCDADE617A82CE5008AAA28 /* CFNetwork.framework in Frameworks */,
@@ -166,6 +172,8 @@
 		8DCDADAA17A6B3CC008AAA28 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6BF4F42E1E2818DE0073A103 /* AVFoundation.framework */,
+				6BF4F42F1E2818DE0073A103 /* AVKit.framework */,
 				8DCDADDC17A82CE5008AAA28 /* AudioToolbox.framework */,
 				8DCDADDD17A82CE5008AAA28 /* CFNetwork.framework */,
 				8DCDADAF17A6B3CC008AAA28 /* CoreGraphics.framework */,

@@ -13,7 +13,8 @@
 @interface InboxViewController : UITableViewController
 
 @property (nonatomic, strong) Message *selectedMessage;
-@property (nonatomic, strong) MPMoviePlayerController *moviePlayer;
+// TJM 1/12/2017 Bug Fix #5 - replace deprecated MPMoviePlayer with AVPlayerViewController
+//@property (nonatomic, strong) MPMoviePlayerController *moviePlayer;
 
 - (IBAction)logout:(id)sender;
 
