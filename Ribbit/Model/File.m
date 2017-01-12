@@ -24,12 +24,28 @@ NSString * const CacheDirectoryName = @"ribbit-cache";
 #pragma mark - Public methods
 
 - (void)saveInBackgroundWithBlock:(BooleanResultBlock)block {
-  [self.data writeToFile:[self filePath] atomically:YES];
-  block(YES,nil);
+    
+    // TJM 1/12/2017 Bug Fix #5 - check to see if file gets written correctly
+    if ([self.data writeToFile:[self filePath] atomically:YES]) {
+        
+        block(YES,nil);
+
+    } else {
+        
+        NSDictionary *userInfo = @{NSLocalizedDescriptionKey: NSLocalizedString(@"Unable to write file", nil)};
+        
+        NSError *error = [NSError errorWithDomain:@"com.teamtreehouse.Ribbit" code:999 userInfo:userInfo];
+        block(NO, error);
+    }
+    
+    // TJM 1/12/2017 Bug Fix #5 - we are done with the data component - no need to hold on to it
+    self.data = nil;
 }
 
 - (NSURL*)fileURL {
-  return [NSURL fileURLWithPath:self.filename];
+    // TJM 1/12/2017 Bug Fix #5 - implementation of this method was pointing in the wrong place
+    return [NSURL fileURLWithPath:[self filePath] isDirectory:NO];
+  //return [NSURL fileURLWithPath:self.filename];
 }
 
 
@@ -70,5 +86,8 @@ NSString * const CacheDirectoryName = @"ribbit-cache";
   }
 }
 
+- (void)dealloc {
+    NSLog(@"File got dealloced");
+}
 
 @end

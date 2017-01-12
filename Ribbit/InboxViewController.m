@@ -37,6 +37,13 @@
   return [[App currentApp] messages];
 }
 
+// TJM 1/12/2017 Bug Fix #5 - need to reload the view controller each time we return to this screen
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.tableView reloadData];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

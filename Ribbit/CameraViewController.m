@@ -161,7 +161,10 @@
     NSString *fileType;
     
     if (self.image != nil) {
-        UIImage *newImage = self.image;
+        // TJM 1/12/2017 Bug Fix #5 - resize the image to save some space and to better fit this device
+        CGFloat aspectRatio = self.image.size.height / self.image.size.width;
+        UIImage *newImage = [self resizeImage:self.image toWidth:750.0 andHeight:750.0*aspectRatio];
+        
         fileData = UIImagePNGRepresentation(newImage);
         fileName = [NSString stringWithFormat:@"%f.png",[NSDate timeIntervalSinceReferenceDate]];
         fileType = @"image";
@@ -175,13 +178,17 @@
     File *file = [File fileWithName:fileName data:fileData];
     [file saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (error) {
-            [self showErrorAlertWithTitle:@"An error occurred!"  andMessage:@"Please try sending your message again."];
+            // TJM 1/12/2017 Bug Fix #5 - slightly better error reporting
+            NSString *message = [NSString stringWithFormat:@"%@\nPlease try sending your message again.", error.localizedDescription];
+            [self showErrorAlertWithTitle:@"An error occurred!"  andMessage:message];
         }
         else {
             Message *message = [[Message alloc] init];
             message.file = file;
             message.fileType = fileType;
-            message.recipients = self.recipients;
+            
+            // TJM 1/12/2017 Bug Fix #5 - don't want to keep a reference to this array, we want an equivalent array
+            message.recipients = [NSMutableArray arrayWithArray:self.recipients];
             message.senderId = [[User currentUser] objectId];
             message.senderName = [[User currentUser] username];
           
