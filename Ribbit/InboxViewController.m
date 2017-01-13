@@ -12,6 +12,8 @@
 #import "App.h"
 #import "File.h"
 
+#import "InboxCell.h"
+
 // TJM 1/12/2017 Bug Fix #5 - replace deprecated MPMoviePlayer with AVPlayerViewController
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
@@ -65,18 +67,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    static NSString *CellIdentifier = @"InboxCell";
+    InboxCell *cell = (InboxCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     Message *message = [[self messages] objectAtIndex:indexPath.row];
-    cell.textLabel.text = message.senderName;
+    cell.senderNameLabel.text = message.senderName;
     
     NSString *fileType = message.fileType;
     if ([fileType isEqualToString:@"image"]) {
-        cell.imageView.image = [UIImage imageNamed:@"icon_image"];
+        cell.iconImageView.image = [UIImage imageNamed:@"icon_image"];
     }
     else {
-        cell.imageView.image = [UIImage imageNamed:@"icon_video"];
+        cell.iconImageView.image = [UIImage imageNamed:@"icon_video"];
     }
     
     return cell;

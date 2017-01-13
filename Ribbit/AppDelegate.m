@@ -11,6 +11,27 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    // Thanks to buczek on StackOverflow
+    // http://stackoverflow.com/questions/25845855/transparent-navigation-bar-ios
+    
+    // Sets background to a blank/empty image
+    [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    // Sets shadow (line below the bar) to a blank image
+    [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
+    // Sets the translucent background color
+    [[UINavigationBar appearance] setBackgroundColor:[UIColor colorWithRed:160.0/255.0 green:133.0/255.0 blue:198.0/255.0 alpha:1.0]];
+    // Set translucent. (Default value is already true, so this can be removed if desired.)
+    [UINavigationBar appearance].translucent = YES;
+    // Set font color of navigation bar
+    [UINavigationBar appearance].tintColor = [UIColor whiteColor];
+
+
+    [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];
+    [[UITabBar appearance] setBackgroundColor:[UIColor colorWithRed:160.0/255.0 green:133.0/255.0 blue:198.0/255.0 alpha:1.0]];
+    [UITabBar appearance].translucent = YES;
+    [UITabBar appearance].tintColor = [UIColor whiteColor];
+    [UITabBar appearance].unselectedItemTintColor = [UIColor darkGrayColor];
     return YES;
 }
 

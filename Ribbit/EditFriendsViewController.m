@@ -9,6 +9,8 @@
 #import "User.h"
 #import "App.h"
 
+#import "FriendsCell.h"
+
 @interface EditFriendsViewController ()
 
 @end
@@ -44,11 +46,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    static NSString *CellIdentifier = @"FriendsCell";
+    FriendsCell *cell = (FriendsCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     User *user = [self.allUsers objectAtIndex:indexPath.row];
-    cell.textLabel.text = user.username;
+    cell.nameLabel.text = user.username;
     
     if ([self isFriend:user]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;

@@ -12,6 +12,8 @@
 #import "Message.h"
 #import "UIViewController+ShowErrorAlert.h"
 
+#import "FriendsCell.h"
+
 @interface CameraViewController ()
 
 @end
@@ -35,6 +37,8 @@
         self.imagePicker.delegate = self;
         self.imagePicker.allowsEditing = NO;
         self.imagePicker.videoMaximumDuration = 10;
+        
+        [self.imagePicker.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
         
         if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
             self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -65,11 +69,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    static NSString *CellIdentifier = @"FriendsCell";
+    FriendsCell *cell = (FriendsCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     User *user = [self.friends objectAtIndex:indexPath.row];
-    cell.textLabel.text = user.username;
+    cell.nameLabel.text = user.username;
     
     if ([self.recipients containsObject:user.objectId]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;

@@ -22,6 +22,21 @@
     self.navigationItem.hidesBackButton = YES;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
+    [super viewWillDisappear:animated];
+}
 
 - (IBAction)login:(id)sender {
     NSString *username = [self.usernameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];

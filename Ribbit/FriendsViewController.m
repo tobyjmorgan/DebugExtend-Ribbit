@@ -10,6 +10,8 @@
 #import "App.h"
 #import "User.h"
 
+#import "FriendsCell.h"
+
 @interface FriendsViewController ()
 
 @end
@@ -45,11 +47,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    static NSString *CellIdentifier = @"FriendsCell";
+    FriendsCell *cell = (FriendsCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     User *user = [self.friends objectAtIndex:indexPath.row];
-    cell.textLabel.text = user.username;
+    cell.nameLabel.text = user.username;
     
     return cell;
 }
