@@ -6,11 +6,13 @@
 //
 
 #import "AppDelegate.h"
+@import Firebase;
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [FIRApp configure];
     
     // Thanks to buczek on StackOverflow
     // http://stackoverflow.com/questions/25845855/transparent-navigation-bar-ios
