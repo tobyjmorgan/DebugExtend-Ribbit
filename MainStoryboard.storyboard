@@ -215,6 +215,7 @@
                                         <constraint firstAttribute="trailing" secondItem="Oew-VU-z52" secondAttribute="trailing" constant="4" id="trP-5g-mmC"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.95900684599999997" green="0.94531983139999998" blue="0.98358553650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.62614566090000001" green="0.52185499670000002" blue="0.77770751709999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="nameLabel" destination="Fd0-jQ-ucE" id="gp0-xd-ZDN"/>
@@ -293,6 +294,7 @@
                                         <constraint firstAttribute="trailing" secondItem="FL5-F4-OJ3" secondAttribute="trailing" constant="4" id="ucB-BN-Ydi"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.95900684599999997" green="0.94531983139999998" blue="0.98358553650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.62614566090000001" green="0.52185499670000002" blue="0.77770751709999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="nameLabel" destination="5bd-Cf-XYY" id="5yv-2v-r56"/>
@@ -365,6 +367,7 @@
                                         <constraint firstAttribute="bottom" secondItem="I7x-f3-lCi" secondAttribute="bottom" id="rsn-gO-Un7"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.95900684599999997" green="0.94531983139999998" blue="0.98358553650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.62614566090000001" green="0.52185499670000002" blue="0.77770751709999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="nameLabel" destination="O8N-md-tzO" id="Pwi-LT-N6c"/>
@@ -453,7 +456,7 @@
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ou4-X0-nAm">
                                             <rect key="frame" x="60" y="4" width="278" height="36"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -469,6 +472,8 @@
                                         <constraint firstItem="in0-66-B9h" firstAttribute="top" secondItem="y8I-JB-yhJ" secondAttribute="top" constant="4" id="kcC-y1-I5c"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.95900684599999997" green="0.94531983139999998" blue="0.98358553650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.62614566090000001" green="0.52185499670000002" blue="0.77770751709999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="iconImageView" destination="in0-66-B9h" id="Kb0-TR-UBE"/>
                                     <outlet property="senderNameLabel" destination="ou4-X0-nAm" id="xqg-qf-Mkx"/>
@@ -604,7 +609,7 @@
                 <navigationController id="SAM-QV-HdH" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Inbox" image="inbox.png" id="yMg-KC-6Qa"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Tyd-pg-S0W">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Tyd-pg-S0W">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
@@ -627,7 +632,7 @@
                 <navigationController id="zJh-fY-VOy" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Friends" image="friends.png" id="6YW-Xf-kqN"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="aKs-eY-mik">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aKs-eY-mik">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
@@ -650,7 +655,7 @@
                 <navigationController id="y1S-gv-rLP" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Camera" image="camera.png" id="DjA-tt-C9L"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="MmC-tN-E3f">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MmC-tN-E3f">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">

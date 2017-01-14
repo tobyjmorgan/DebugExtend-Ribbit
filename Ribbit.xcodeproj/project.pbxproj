@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B8E40251E28738600859A3D /* FriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B8E40241E28738600859A3D /* FriendsCell.m */; };
+		6B8E40281E29389600859A3D /* InboxCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B8E40271E29389600859A3D /* InboxCell.m */; };
+		6BEAF6AB1E29979C00999729 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6BEAF6AA1E29979C00999729 /* GoogleService-Info.plist */; };
 		6BF4F42C1E1D5C050073A103 /* UIViewController+ShowErrorAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF4F42B1E1D5C040073A103 /* UIViewController+ShowErrorAlert.m */; };
 		6BF4F4301E2818DE0073A103 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BF4F42E1E2818DE0073A103 /* AVFoundation.framework */; };
 		6BF4F4311E2818DE0073A103 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BF4F42F1E2818DE0073A103 /* AVKit.framework */; };
@@ -41,6 +44,7 @@
 		8DCDADF017A82EC7008AAA28 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCDADEF17A82EC7008AAA28 /* SignupViewController.m */; };
 		8DCDADF317A82EEB008AAA28 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCDADF217A82EEB008AAA28 /* LoginViewController.m */; };
 		8DCDADF617A83853008AAA28 /* InboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCDADF517A83852008AAA28 /* InboxViewController.m */; };
+		ADDB43D5E948E22991D791A8 /* libPods-Ribbit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10C849192E92946471C8C75D /* libPods-Ribbit.a */; };
 		B35A3F481D7EE8050082EF0C /* App.m in Sources */ = {isa = PBXBuildFile; fileRef = B35A3F471D7EE8050082EF0C /* App.m */; };
 		B3EB1F0C1D6DBA1B00B5FDAD /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = B3EB1F0B1D6DBA1B00B5FDAD /* User.m */; };
 		B3EB1F0F1D6F034A00B5FDAD /* File.m in Sources */ = {isa = PBXBuildFile; fileRef = B3EB1F0E1D6F034A00B5FDAD /* File.m */; };
@@ -48,6 +52,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0CA1A56541D2468073D7CA7E /* Pods-Ribbit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ribbit.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ribbit/Pods-Ribbit.release.xcconfig"; sourceTree = "<group>"; };
+		10C849192E92946471C8C75D /* libPods-Ribbit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Ribbit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B8E40231E28738600859A3D /* FriendsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsCell.h; sourceTree = "<group>"; };
+		6B8E40241E28738600859A3D /* FriendsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsCell.m; sourceTree = "<group>"; };
+		6B8E40261E29389600859A3D /* InboxCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InboxCell.h; sourceTree = "<group>"; };
+		6B8E40271E29389600859A3D /* InboxCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InboxCell.m; sourceTree = "<group>"; };
+		6BEAF6AA1E29979C00999729 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6BF4F42A1E1D5C040073A103 /* UIViewController+ShowErrorAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ShowErrorAlert.h"; sourceTree = "<group>"; };
 		6BF4F42B1E1D5C040073A103 /* UIViewController+ShowErrorAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ShowErrorAlert.m"; sourceTree = "<group>"; };
 		6BF4F42E1E2818DE0073A103 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -56,6 +67,7 @@
 		6BF4F4341E282B240073A103 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
 		6BF4F4441E282FB70073A103 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6BF4F4461E28300A0073A103 /* LaunchScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchScreen.png; sourceTree = "<group>"; };
+		85584B3C8F2FB286CFE9F85B /* Pods-Ribbit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ribbit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ribbit/Pods-Ribbit.debug.xcconfig"; sourceTree = "<group>"; };
 		8D2A01A817AB0EEE00A43140 /* EditFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditFriendsViewController.h; sourceTree = "<group>"; };
 		8D2A01A917AB0EEE00A43140 /* EditFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditFriendsViewController.m; sourceTree = "<group>"; };
 		8D2A01AA17AB0EEE00A43140 /* FriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsViewController.h; sourceTree = "<group>"; };
@@ -125,12 +137,22 @@
 				8DCDADB017A6B3CC008AAA28 /* CoreGraphics.framework in Frameworks */,
 				8DCDADAC17A6B3CC008AAA28 /* UIKit.framework in Frameworks */,
 				8DCDADAE17A6B3CC008AAA28 /* Foundation.framework in Frameworks */,
+				ADDB43D5E948E22991D791A8 /* libPods-Ribbit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37F831F9957320D09DBDBA77 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				85584B3C8F2FB286CFE9F85B /* Pods-Ribbit.debug.xcconfig */,
+				0CA1A56541D2468073D7CA7E /* Pods-Ribbit.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		6BF4F42D1E1D5C0B0073A103 /* HomeGrown */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +168,7 @@
 				8DCDADB117A6B3CC008AAA28 /* Ribbit */,
 				8DCDADAA17A6B3CC008AAA28 /* Frameworks */,
 				8DCDADA917A6B3CC008AAA28 /* Products */,
+				37F831F9957320D09DBDBA77 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -175,6 +198,7 @@
 				8DCDADE317A82CE5008AAA28 /* StoreKit.framework */,
 				8DCDADE417A82CE5008AAA28 /* SystemConfiguration.framework */,
 				8DCDADAB17A6B3CC008AAA28 /* UIKit.framework */,
+				10C849192E92946471C8C75D /* libPods-Ribbit.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -195,10 +219,14 @@
 				8D2A01A917AB0EEE00A43140 /* EditFriendsViewController.m */,
 				8D2A01AA17AB0EEE00A43140 /* FriendsViewController.h */,
 				8D2A01AB17AB0EEE00A43140 /* FriendsViewController.m */,
+				6B8E40231E28738600859A3D /* FriendsCell.h */,
+				6B8E40241E28738600859A3D /* FriendsCell.m */,
 				8D5ED98117B052200079548F /* ImageViewController.h */,
 				8D5ED98217B052200079548F /* ImageViewController.m */,
 				8DCDADF417A83852008AAA28 /* InboxViewController.h */,
 				8DCDADF517A83852008AAA28 /* InboxViewController.m */,
+				6B8E40261E29389600859A3D /* InboxCell.h */,
+				6B8E40271E29389600859A3D /* InboxCell.m */,
 				8DCDADF117A82EEB008AAA28 /* LoginViewController.h */,
 				8DCDADF217A82EEB008AAA28 /* LoginViewController.m */,
 				8DCDADEE17A82EC7008AAA28 /* SignupViewController.h */,
@@ -213,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				8DCDADB317A6B3CC008AAA28 /* Ribbit-Info.plist */,
+				6BEAF6AA1E29979C00999729 /* GoogleService-Info.plist */,
 				8DCDADB417A6B3CC008AAA28 /* InfoPlist.strings */,
 				8DCDADB717A6B3CC008AAA28 /* main.m */,
 				8DCDADB917A6B3CC008AAA28 /* Ribbit-Prefix.pch */,
@@ -256,9 +285,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8DCDADC517A6B3CC008AAA28 /* Build configuration list for PBXNativeTarget "Ribbit" */;
 			buildPhases = (
+				1D10A8533047B30181EC8DA5 /* [CP] Check Pods Manifest.lock */,
 				8DCDADA417A6B3CC008AAA28 /* Sources */,
 				8DCDADA517A6B3CC008AAA28 /* Frameworks */,
 				8DCDADA617A6B3CC008AAA28 /* Resources */,
+				117D50E781DDFC0B0A60BA35 /* [CP] Embed Pods Frameworks */,
+				09CA68851EB710677C111148 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -312,6 +344,7 @@
 				6BF4F4451E282FB70073A103 /* LaunchScreen.storyboard in Resources */,
 				8DCDADC217A6B3CC008AAA28 /* Default-568h@2x.png in Resources */,
 				8DCDADC917A6BA34008AAA28 /* MainStoryboard.storyboard in Resources */,
+				6BEAF6AB1E29979C00999729 /* GoogleService-Info.plist in Resources */,
 				6BF4F4371E282B240073A103 /* Background.png in Resources */,
 				6BF4F4331E2829760073A103 /* Media.xcassets in Resources */,
 			);
@@ -319,16 +352,66 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		09CA68851EB710677C111148 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ribbit/Pods-Ribbit-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		117D50E781DDFC0B0A60BA35 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ribbit/Pods-Ribbit-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1D10A8533047B30181EC8DA5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8DCDADA417A6B3CC008AAA28 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				B3EB1F0C1D6DBA1B00B5FDAD /* User.m in Sources */,
+				6B8E40251E28738600859A3D /* FriendsCell.m in Sources */,
 				6BF4F42C1E1D5C050073A103 /* UIViewController+ShowErrorAlert.m in Sources */,
 				B3EB1F121D6F035800B5FDAD /* Message.m in Sources */,
 				8DCDADB817A6B3CC008AAA28 /* main.m in Sources */,
 				8DCDADBC17A6B3CC008AAA28 /* AppDelegate.m in Sources */,
+				6B8E40281E29389600859A3D /* InboxCell.m in Sources */,
 				8DCDADF017A82EC7008AAA28 /* SignupViewController.m in Sources */,
 				8DCDADF317A82EEB008AAA28 /* LoginViewController.m in Sources */,
 				8DCDADF617A83853008AAA28 /* InboxViewController.m in Sources */,
@@ -433,8 +516,10 @@
 		};
 		8DCDADC617A6B3CC008AAA28 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 85584B3C8F2FB286CFE9F85B /* Pods-Ribbit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 646297YD5V;
@@ -454,8 +539,10 @@
 		};
 		8DCDADC717A6B3CC008AAA28 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0CA1A56541D2468073D7CA7E /* Pods-Ribbit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 646297YD5V;
