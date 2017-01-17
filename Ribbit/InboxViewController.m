@@ -7,12 +7,13 @@
 
 #import "InboxViewController.h"
 #import "ImageViewController.h"
-#import "Message.h"
+#import "RibbitMessage.h"
 #import "User.h"
 #import "App.h"
 #import "File.h"
 
 #import "InboxCell.h"
+#import <Backendless/Backendless.h>
 
 // TJM 1/12/2017 Bug Fix #5 - replace deprecated MPMoviePlayer with AVPlayerViewController
 #import <AVFoundation/AVFoundation.h>
@@ -31,13 +32,33 @@
     // TJM 1/12/2017 Bug Fix #5 - replace deprecated MPMoviePlayer with AVPlayerViewController
 //    self.moviePlayer = [[MPMoviePlayerController alloc] init];
     
-    User *currentUser = [User currentUser];
-    if (currentUser) {
-        NSLog(@"Current user: %@", currentUser.username);
+    // TJM - validating current user with Backendless
+    @try { 
+        NSNumber *result = [backendless.userService isValidUserToken];
+        
+        if ([result boolValue] == YES) {
+            
+            NSLog(@"Current user: %@", [backendless.userService currentUser].name);
+
+        } else {
+            
+            [self performSegueWithIdentifier:@"showLogin" sender:self];
+        }
     }
-    else {
+    @catch (Fault *fault) {
+
+        // TJM - if there was an error validating the current user, just go to the login anyway
+        NSLog(@"FAULT (SYNC): %@", fault);
         [self performSegueWithIdentifier:@"showLogin" sender:self];
     }
+    
+//    User *currentUser = [User currentUser];
+//    if (currentUser) {
+//        NSLog(@"Current user: %@", currentUser.username);
+//    }
+//    else {
+//        [self performSegueWithIdentifier:@"showLogin" sender:self];
+//    }
 }
 
 - (NSArray *)messages {
@@ -70,7 +91,7 @@
     static NSString *CellIdentifier = @"InboxCell";
     InboxCell *cell = (InboxCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    Message *message = [[self messages] objectAtIndex:indexPath.row];
+    RibbitMessage *message = [[self messages] objectAtIndex:indexPath.row];
     cell.senderNameLabel.text = message.senderName;
     
     NSString *fileType = message.fileType;
@@ -118,6 +139,9 @@
 
 - (IBAction)logout:(id)sender {
 //    [User logOut];
+    // TJM - log out of Backendless
+    [backendless.userService logout];
+    
     [self performSegueWithIdentifier:@"showLogin" sender:self];
 }
 

@@ -10,6 +10,8 @@
 #import "User.h"
 #import "UIViewController+ShowErrorAlert.h"
 
+#import <Backendless/Backendless.h>
+
 @interface SignupViewController ()
 
 @end
@@ -52,17 +54,21 @@
         newUser.password = password;
         newUser.email = email;
         
-//        [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//            if (error) {
-//                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Sorry!"
-//                                                                    message:[error.userInfo objectForKey:@"error"]
-//                                                                   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-//                [alertView show];
-//            }
-//            else {
-                [self.navigationController popToRootViewControllerAnimated:YES];
-//            }
-//        }];
+        // TJM - attempt to create the new user in Backendless using email and password
+        BackendlessUser *user = [BackendlessUser new];
+        user.password = password;
+        [user setProperty:@"name" object:username];
+        [user setProperty:@"email" object:email];
+        
+        [backendless.userService registering:user
+                                    response:^(BackendlessUser * _Nullable user) {
+                                        // TJM - all went well - now dismiss
+                                        [backendless.userService setStayLoggedIn:YES];
+                                        [self.navigationController popToRootViewControllerAnimated:YES];
+                                    } error:^(Fault * _Nullable fault) {
+                                        // TJM - notify the user what the error was
+                                        [self showErrorAlertWithTitle:@"Sorry!" andMessage:fault.message];
+                                    }];
     }
 }
 

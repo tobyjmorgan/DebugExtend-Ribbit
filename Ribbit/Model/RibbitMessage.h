@@ -1,5 +1,5 @@
 //
-//  Message.h
+//  RibbitMessage.h
 //  Ribbit
 //
 //  Created by Amit Bijlani on 8/25/16.
@@ -11,7 +11,7 @@
 
 @class File;
 
-@interface Message : NSObject
+@interface RibbitMessage : NSObject
 
 @property (strong, nonatomic) File *file;
 @property (strong, nonatomic) NSArray *recipients;

@@ -7,11 +7,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class Message;
+@class RibbitMessage;
 
 @interface ImageViewController : UIViewController
 
-@property (nonatomic, strong) Message *message;
+@property (nonatomic, strong) RibbitMessage *message;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end

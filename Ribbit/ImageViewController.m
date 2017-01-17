@@ -6,7 +6,7 @@
 //
 
 #import "ImageViewController.h"
-#import "Message.h"
+#import "RibbitMessage.h"
 #import "File.h"
 
 @interface ImageViewController ()

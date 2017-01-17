@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		6B8E40251E28738600859A3D /* FriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B8E40241E28738600859A3D /* FriendsCell.m */; };
 		6B8E40281E29389600859A3D /* InboxCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B8E40271E29389600859A3D /* InboxCell.m */; };
-		6BEAF6AB1E29979C00999729 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6BEAF6AA1E29979C00999729 /* GoogleService-Info.plist */; };
 		6BF4F42C1E1D5C050073A103 /* UIViewController+ShowErrorAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF4F42B1E1D5C040073A103 /* UIViewController+ShowErrorAlert.m */; };
 		6BF4F4301E2818DE0073A103 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BF4F42E1E2818DE0073A103 /* AVFoundation.framework */; };
 		6BF4F4311E2818DE0073A103 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BF4F42F1E2818DE0073A103 /* AVKit.framework */; };
@@ -17,6 +16,7 @@
 		6BF4F4371E282B240073A103 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BF4F4341E282B240073A103 /* Background.png */; };
 		6BF4F4451E282FB70073A103 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BF4F4441E282FB70073A103 /* LaunchScreen.storyboard */; };
 		6BF4F4471E28300A0073A103 /* LaunchScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BF4F4461E28300A0073A103 /* LaunchScreen.png */; };
+		831EBC422C294B2AF1823DC8 /* libPods-Ribbit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8532F72BBD51414E525E28AE /* libPods-Ribbit.a */; };
 		8D2A01AC17AB0EEE00A43140 /* EditFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D2A01A917AB0EEE00A43140 /* EditFriendsViewController.m */; };
 		8D2A01AD17AB0EEE00A43140 /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D2A01AB17AB0EEE00A43140 /* FriendsViewController.m */; };
 		8D5ED96317AFFE300079548F /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5ED96217AFFE300079548F /* CameraViewController.m */; };
@@ -44,21 +44,18 @@
 		8DCDADF017A82EC7008AAA28 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCDADEF17A82EC7008AAA28 /* SignupViewController.m */; };
 		8DCDADF317A82EEB008AAA28 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCDADF217A82EEB008AAA28 /* LoginViewController.m */; };
 		8DCDADF617A83853008AAA28 /* InboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCDADF517A83852008AAA28 /* InboxViewController.m */; };
-		ADDB43D5E948E22991D791A8 /* libPods-Ribbit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10C849192E92946471C8C75D /* libPods-Ribbit.a */; };
 		B35A3F481D7EE8050082EF0C /* App.m in Sources */ = {isa = PBXBuildFile; fileRef = B35A3F471D7EE8050082EF0C /* App.m */; };
 		B3EB1F0C1D6DBA1B00B5FDAD /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = B3EB1F0B1D6DBA1B00B5FDAD /* User.m */; };
 		B3EB1F0F1D6F034A00B5FDAD /* File.m in Sources */ = {isa = PBXBuildFile; fileRef = B3EB1F0E1D6F034A00B5FDAD /* File.m */; };
-		B3EB1F121D6F035800B5FDAD /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = B3EB1F111D6F035800B5FDAD /* Message.m */; };
+		B3EB1F121D6F035800B5FDAD /* RibbitMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = B3EB1F111D6F035800B5FDAD /* RibbitMessage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0CA1A56541D2468073D7CA7E /* Pods-Ribbit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ribbit.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ribbit/Pods-Ribbit.release.xcconfig"; sourceTree = "<group>"; };
-		10C849192E92946471C8C75D /* libPods-Ribbit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Ribbit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B8E40231E28738600859A3D /* FriendsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsCell.h; sourceTree = "<group>"; };
 		6B8E40241E28738600859A3D /* FriendsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsCell.m; sourceTree = "<group>"; };
 		6B8E40261E29389600859A3D /* InboxCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InboxCell.h; sourceTree = "<group>"; };
 		6B8E40271E29389600859A3D /* InboxCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InboxCell.m; sourceTree = "<group>"; };
-		6BEAF6AA1E29979C00999729 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6BF4F42A1E1D5C040073A103 /* UIViewController+ShowErrorAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ShowErrorAlert.h"; sourceTree = "<group>"; };
 		6BF4F42B1E1D5C040073A103 /* UIViewController+ShowErrorAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ShowErrorAlert.m"; sourceTree = "<group>"; };
 		6BF4F42E1E2818DE0073A103 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -67,6 +64,7 @@
 		6BF4F4341E282B240073A103 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
 		6BF4F4441E282FB70073A103 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6BF4F4461E28300A0073A103 /* LaunchScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchScreen.png; sourceTree = "<group>"; };
+		8532F72BBD51414E525E28AE /* libPods-Ribbit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Ribbit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		85584B3C8F2FB286CFE9F85B /* Pods-Ribbit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ribbit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ribbit/Pods-Ribbit.debug.xcconfig"; sourceTree = "<group>"; };
 		8D2A01A817AB0EEE00A43140 /* EditFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditFriendsViewController.h; sourceTree = "<group>"; };
 		8D2A01A917AB0EEE00A43140 /* EditFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditFriendsViewController.m; sourceTree = "<group>"; };
@@ -112,8 +110,8 @@
 		B3EB1F0B1D6DBA1B00B5FDAD /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		B3EB1F0D1D6F034A00B5FDAD /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = File.h; sourceTree = "<group>"; };
 		B3EB1F0E1D6F034A00B5FDAD /* File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = File.m; sourceTree = "<group>"; };
-		B3EB1F101D6F035800B5FDAD /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
-		B3EB1F111D6F035800B5FDAD /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		B3EB1F101D6F035800B5FDAD /* RibbitMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RibbitMessage.h; sourceTree = "<group>"; };
+		B3EB1F111D6F035800B5FDAD /* RibbitMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RibbitMessage.m; sourceTree = "<group>"; };
 		B3EB1F131D6F06A400B5FDAD /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,7 +135,7 @@
 				8DCDADB017A6B3CC008AAA28 /* CoreGraphics.framework in Frameworks */,
 				8DCDADAC17A6B3CC008AAA28 /* UIKit.framework in Frameworks */,
 				8DCDADAE17A6B3CC008AAA28 /* Foundation.framework in Frameworks */,
-				ADDB43D5E948E22991D791A8 /* libPods-Ribbit.a in Frameworks */,
+				831EBC422C294B2AF1823DC8 /* libPods-Ribbit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,7 +196,7 @@
 				8DCDADE317A82CE5008AAA28 /* StoreKit.framework */,
 				8DCDADE417A82CE5008AAA28 /* SystemConfiguration.framework */,
 				8DCDADAB17A6B3CC008AAA28 /* UIKit.framework */,
-				10C849192E92946471C8C75D /* libPods-Ribbit.a */,
+				8532F72BBD51414E525E28AE /* libPods-Ribbit.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -241,7 +239,6 @@
 			isa = PBXGroup;
 			children = (
 				8DCDADB317A6B3CC008AAA28 /* Ribbit-Info.plist */,
-				6BEAF6AA1E29979C00999729 /* GoogleService-Info.plist */,
 				8DCDADB417A6B3CC008AAA28 /* InfoPlist.strings */,
 				8DCDADB717A6B3CC008AAA28 /* main.m */,
 				8DCDADB917A6B3CC008AAA28 /* Ribbit-Prefix.pch */,
@@ -270,8 +267,8 @@
 				B3EB1F0B1D6DBA1B00B5FDAD /* User.m */,
 				B3EB1F0D1D6F034A00B5FDAD /* File.h */,
 				B3EB1F0E1D6F034A00B5FDAD /* File.m */,
-				B3EB1F101D6F035800B5FDAD /* Message.h */,
-				B3EB1F111D6F035800B5FDAD /* Message.m */,
+				B3EB1F101D6F035800B5FDAD /* RibbitMessage.h */,
+				B3EB1F111D6F035800B5FDAD /* RibbitMessage.m */,
 				B35A3F461D7EE8050082EF0C /* App.h */,
 				B35A3F471D7EE8050082EF0C /* App.m */,
 			);
@@ -344,7 +341,6 @@
 				6BF4F4451E282FB70073A103 /* LaunchScreen.storyboard in Resources */,
 				8DCDADC217A6B3CC008AAA28 /* Default-568h@2x.png in Resources */,
 				8DCDADC917A6BA34008AAA28 /* MainStoryboard.storyboard in Resources */,
-				6BEAF6AB1E29979C00999729 /* GoogleService-Info.plist in Resources */,
 				6BF4F4371E282B240073A103 /* Background.png in Resources */,
 				6BF4F4331E2829760073A103 /* Media.xcassets in Resources */,
 			);
@@ -408,7 +404,7 @@
 				B3EB1F0C1D6DBA1B00B5FDAD /* User.m in Sources */,
 				6B8E40251E28738600859A3D /* FriendsCell.m in Sources */,
 				6BF4F42C1E1D5C050073A103 /* UIViewController+ShowErrorAlert.m in Sources */,
-				B3EB1F121D6F035800B5FDAD /* Message.m in Sources */,
+				B3EB1F121D6F035800B5FDAD /* RibbitMessage.m in Sources */,
 				8DCDADB817A6B3CC008AAA28 /* main.m in Sources */,
 				8DCDADBC17A6B3CC008AAA28 /* AppDelegate.m in Sources */,
 				6B8E40281E29389600859A3D /* InboxCell.m in Sources */,
@@ -519,7 +515,7 @@
 			baseConfigurationReference = 85584B3C8F2FB286CFE9F85B /* Pods-Ribbit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 646297YD5V;
@@ -530,6 +526,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ribbit/Ribbit-Prefix.pch";
 				INFOPLIST_FILE = "Ribbit/Ribbit-Info.plist";
+				LINK_WITH_STANDARD_LIBRARIES = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.redbred.Ribbit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -542,7 +539,7 @@
 			baseConfigurationReference = 0CA1A56541D2468073D7CA7E /* Pods-Ribbit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 646297YD5V;
@@ -553,6 +550,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ribbit/Ribbit-Prefix.pch";
 				INFOPLIST_FILE = "Ribbit/Ribbit-Info.plist";
+				LINK_WITH_STANDARD_LIBRARIES = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.redbred.Ribbit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

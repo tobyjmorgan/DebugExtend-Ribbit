@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@class Message;
+@class RibbitMessage;
 
 @interface App : NSObject
 
 + (instancetype) currentApp;
-- (void) addMessage:(Message*)message;
-- (void) deleteMessage:(Message*)message;
+- (void) addMessage:(RibbitMessage*)message;
+- (void) deleteMessage:(RibbitMessage*)message;
 - (NSArray *) messages;
 - (NSArray *) allUsers;
 

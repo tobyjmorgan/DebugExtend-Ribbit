@@ -7,6 +7,6 @@ target 'Ribbit' do
 
   # Pods for Ribbit
 
-pod 'Firebase/Core'
- 
+pod 'Backendless'
+
 end

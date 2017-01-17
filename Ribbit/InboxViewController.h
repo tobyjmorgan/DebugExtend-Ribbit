@@ -8,11 +8,11 @@
 #import <UIKit/UIKit.h>
 #import <MediaPlayer/MediaPlayer.h>
 
-@class Message;
+@class RibbitMessage;
 
 @interface InboxViewController : UITableViewController
 
-@property (nonatomic, strong) Message *selectedMessage;
+@property (nonatomic, strong) RibbitMessage *selectedMessage;
 // TJM 1/12/2017 Bug Fix #5 - replace deprecated MPMoviePlayer with AVPlayerViewController
 //@property (nonatomic, strong) MPMoviePlayerController *moviePlayer;
 

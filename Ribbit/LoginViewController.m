@@ -9,6 +9,8 @@
 #import "LoginViewController.h"
 #import "UIViewController+ShowErrorAlert.h"
 
+#import <Backendless/Backendless.h>
+
 @interface LoginViewController ()
 
 @end
@@ -39,23 +41,31 @@
 }
 
 - (IBAction)login:(id)sender {
-    NSString *username = [self.usernameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *email = [self.usernameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSString *password = [self.passwordField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
-    if ([username length] == 0 || [password length] == 0) {
+    if ([email length] == 0 || [password length] == 0) {
         [self showErrorAlertWithTitle:@"Oops!" andMessage:@"Make sure you enter a username and password!"];
     }
     else {
         
-//        [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser *user, NSError *error) {
+        [backendless.userService login:email password:password
+                              response:^(BackendlessUser * _Nullable user) {
+                                  // TJM - all went well - now dismiss
+                                  [backendless.userService setStayLoggedIn:YES];
+                                  [self.navigationController popToRootViewControllerAnimated:YES];
+                              } error:^(Fault * _Nullable fault) {
+                                  // TJM - notify the user what the error was
+                                  [self showErrorAlertWithTitle:@"Sorry!" andMessage:fault.message];
+                              }];
+        
+//        [[FIRAuth auth] signInWithEmail:username password:password completion:^(FIRUser *user, NSError *error) {
 //            if (error) {
-//                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Sorry!"
-//                                                                    message:[error.userInfo objectForKey:@"error"]
-//                                                                   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-//                [alertView show];
+//                [self showErrorAlertWithTitle:@"Sorry!" andMessage:[error.userInfo objectForKey:NSLocalizedDescriptionKey]];
 //            }
 //            else {
-                [self.navigationController popToRootViewControllerAnimated:YES];
+//                
+//                [self.navigationController popToRootViewControllerAnimated:YES];
 //            }
 //        }];
     }

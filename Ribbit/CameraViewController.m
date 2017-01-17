@@ -9,7 +9,7 @@
 #import <MobileCoreServices/UTCoreTypes.h>
 #import "User.h"
 #import "File.h"
-#import "Message.h"
+#import "RibbitMessage.h"
 #import "UIViewController+ShowErrorAlert.h"
 
 #import "FriendsCell.h"
@@ -187,7 +187,7 @@
             [self showErrorAlertWithTitle:@"An error occurred!"  andMessage:message];
         }
         else {
-            Message *message = [[Message alloc] init];
+            RibbitMessage *message = [[RibbitMessage alloc] init];
             message.file = file;
             message.fileType = fileType;
             

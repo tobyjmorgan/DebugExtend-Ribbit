@@ -7,7 +7,7 @@
 //
 
 #import "App.h"
-#import "Message.h"
+#import "RibbitMessage.h"
 
 @interface App()
 
@@ -39,11 +39,11 @@
   return sharedApp;
 }
 
-- (void) addMessage:(Message*)message {
+- (void) addMessage:(RibbitMessage*)message {
   [self.messagesMutable addObject:message];
 }
 
-- (void) deleteMessage:(Message*)message {
+- (void) deleteMessage:(RibbitMessage*)message {
   [self.messagesMutable removeObject:message];
 }
 
