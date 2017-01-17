@@ -13,11 +13,14 @@
 #import "File.h"
 
 #import "InboxCell.h"
-#import <Backendless/Backendless.h>
 
 // TJM 1/12/2017 Bug Fix #5 - replace deprecated MPMoviePlayer with AVPlayerViewController
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
+
+// TJM - Backendless integration
+#import <Backendless/Backendless.h>
+
 
 @interface InboxViewController ()
 

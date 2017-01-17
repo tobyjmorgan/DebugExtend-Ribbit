@@ -9,6 +9,4 @@
 
 @interface FriendsViewController : UITableViewController
 
-@property (nonatomic, strong) NSArray *friends;
-
 @end

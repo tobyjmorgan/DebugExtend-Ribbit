@@ -10,7 +10,9 @@
 #import "User.h"
 #import "UIViewController+ShowErrorAlert.h"
 
+// TJM - Backendless integration
 #import <Backendless/Backendless.h>
+
 
 @interface SignupViewController ()
 
@@ -49,10 +51,6 @@
                            andMessage:@"Make sure you enter a username, password, and email address!"];
     }
     else {
-        User *newUser = [User currentUser];
-        newUser.username = username;
-        newUser.password = password;
-        newUser.email = email;
         
         // TJM - attempt to create the new user in Backendless using email and password
         BackendlessUser *user = [BackendlessUser new];
@@ -63,6 +61,7 @@
         [backendless.userService registering:user
                                     response:^(BackendlessUser * _Nullable user) {
                                         // TJM - all went well - now dismiss
+                                        [backendless.userService setCurrentUser:user];
                                         [backendless.userService setStayLoggedIn:YES];
                                         [self.navigationController popToRootViewControllerAnimated:YES];
                                     } error:^(Fault * _Nullable fault) {

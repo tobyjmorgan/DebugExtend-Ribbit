@@ -6,12 +6,20 @@
 //
 
 #import "EditFriendsViewController.h"
-#import "User.h"
 #import "App.h"
 
 #import "FriendsCell.h"
 
+// TJM - Backendless integration
+#import <Backendless/Backendless.h>
+#import "TJMFriends.h"
+
 @interface EditFriendsViewController ()
+
+// TJM - Backendless integration
+@property (nonatomic, strong) BackendlessUser *currentUser;
+@property (nonatomic, strong) NSMutableArray *allUsers;
+@property (nonatomic, strong) TJMFriends *myFriends;
 
 @end
 
@@ -21,14 +29,52 @@
 {
     [super viewDidLoad];
   
-  [self.tableView reloadData];
+    // TJM - Backendless integration
+
+    self.allUsers = [[NSMutableArray alloc] init];
+    self.currentUser = [backendless.userService currentUser];
   
-  self.currentUser = [User currentUser];
+    BackendlessDataQuery *allUsersQuery = [BackendlessDataQuery query];
+    allUsersQuery.whereClause = [NSString stringWithFormat:@"objectId != \'%@\'", self.currentUser.objectId];
+
+    BackendlessDataQuery *friendsQuery = [BackendlessDataQuery query];
+    friendsQuery.whereClause = [NSString stringWithFormat:@"user.email = \'%@\'", self.currentUser.email];
+
+    @try {
+        BackendlessCollection *usersCollection = [[backendless.persistenceService of:[BackendlessUser class]] find:allUsersQuery];
+        NSLog(@"users collection: %@", usersCollection);
+        
+        BackendlessCollection *friendsCollection = [[backendless.persistenceService of:[TJMFriends class]] find:friendsQuery];
+        NSLog(@"friends collection: %@", friendsCollection);
+        
+        self.allUsers = [usersCollection.data mutableCopy];
+        
+        if (friendsCollection.data.count > 0) {
+            
+            self.myFriends = [friendsCollection.data firstObject];
+            [self.myFriends loadFriends];
+
+        } else {
+        
+            self.myFriends = [[TJMFriends alloc] init];
+            self.myFriends.user = self.currentUser;
+            
+        }
+        
+        [self.tableView reloadData];
+    }
+    @catch (Fault *fault) {
+        
+        NSLog(@"FAULT (SYNC): %@", fault);
+    }
+
+//  self.currentUser = [User currentUser];
 }
 
-- (NSArray *)allUsers {
-  return [[App currentApp] allUsers];
-}
+// TJM - Backendless integration
+//- (NSArray *)allUsers {
+//  return [[App currentApp] allUsers];
+//}
 
 #pragma mark - Table view data source
 
@@ -49,10 +95,10 @@
     static NSString *CellIdentifier = @"FriendsCell";
     FriendsCell *cell = (FriendsCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    User *user = [self.allUsers objectAtIndex:indexPath.row];
-    cell.nameLabel.text = user.username;
+    BackendlessUser *user = [self.allUsers objectAtIndex:indexPath.row];
+    cell.nameLabel.text = user.name;
     
-    if ([self isFriend:user]) {
+    if ([self.myFriends hasFriend:user]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     else {
@@ -70,22 +116,18 @@
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
   
-    User *user = [self.allUsers objectAtIndex:indexPath.row];
+    BackendlessUser *user = [self.allUsers objectAtIndex:indexPath.row];
     
-    if ([self isFriend:user]) {
+    if ([self.myFriends hasFriend:user]) {
         cell.accessoryType = UITableViewCellAccessoryNone;
-        [self.currentUser removeFriend:user];
+        [self.myFriends removeFromFriends:user];
     }
     else {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        [self.currentUser addFriend:user];
-    }    
-}
-
-#pragma mark - Helper methods
-
-- (BOOL)isFriend:(User *)user {
-  return [self.currentUser.friends containsObject:user];
+        [self.myFriends addToFriends:user];
+    }
+    
+    [[backendless.persistenceService of:[TJMFriends class]] save:self.myFriends];
 }
 
 @end

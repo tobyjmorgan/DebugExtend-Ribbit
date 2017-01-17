@@ -7,12 +7,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class User;
+@class BackendlessUser;
 
 @interface EditFriendsViewController : UITableViewController
 
-@property (nonatomic, strong) User *currentUser;
-
-- (BOOL)isFriend:(User *)user;
+//@property (nonatomic, strong) User *currentUser;
 
 @end
