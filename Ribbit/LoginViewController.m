@@ -10,9 +10,12 @@
 #import "UIViewController+ShowErrorAlert.h"
 
 // TJM - Backendless integration
-#import <Backendless/Backendless.h>
+#import "TJMModel.h"
 
 @interface LoginViewController ()
+
+// TJM - Backendless integration
+@property (nonatomic, weak) TJMModel *model;
 
 @end
 
@@ -22,6 +25,10 @@
 {
     [super viewDidLoad];
 
+    self.model = [TJMModel sharedInstance];
+    self.usernameField.delegate = self;
+    self.passwordField.delegate = self;
+    
     self.navigationItem.hidesBackButton = YES;
 }
 
@@ -50,26 +57,38 @@
     }
     else {
         
-        [backendless.userService login:email password:password
-                              response:^(BackendlessUser * _Nullable user) {
-                                  // TJM - all went well - now dismiss
-                                  [backendless.userService setStayLoggedIn:YES];
-                                  [self.navigationController popToRootViewControllerAnimated:YES];
-                              } error:^(Fault * _Nullable fault) {
-                                  // TJM - notify the user what the error was
-                                  [self showErrorAlertWithTitle:@"Sorry!" andMessage:fault.message];
-                              }];
-        
-//        [[FIRAuth auth] signInWithEmail:username password:password completion:^(FIRUser *user, NSError *error) {
-//            if (error) {
-//                [self showErrorAlertWithTitle:@"Sorry!" andMessage:[error.userInfo objectForKey:NSLocalizedDescriptionKey]];
-//            }
-//            else {
-//                
-//                [self.navigationController popToRootViewControllerAnimated:YES];
-//            }
-//        }];
+        [self.model logInWithEmail:email andPassword:password completion:^(BackendlessUser *user) {
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            
+        }error:^(NSString *errorMessage) {
+            
+            [self showErrorAlertWithTitle:@"Sorry!" andMessage:errorMessage];
+        }];
     }
+}
+
+- (IBAction)resetPassword {
+    NSString *email = [self.usernameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    if ([email length] == 0) {
+        [self showErrorAlertWithTitle:@"Oops!" andMessage:@"Enter your email and try again!"];
+    }
+    else {
+        [self.model passwordResetForEmail:email completion:^(void) {
+            
+            [self showErrorAlertWithTitle:@"Sent!" andMessage:[NSString stringWithFormat:@"An email has been sent to: %@", email]];
+            
+        } error:^(NSString *errorMessage) {
+            
+            [self showErrorAlertWithTitle:@"Sorry!" andMessage:errorMessage];
+        }];
+    }
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
 }
 
 @end

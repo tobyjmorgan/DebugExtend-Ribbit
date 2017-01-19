@@ -11,6 +11,4 @@
 
 @interface EditFriendsViewController : UITableViewController
 
-//@property (nonatomic, strong) User *currentUser;
-
 @end

@@ -6,8 +6,10 @@
 //
 
 #import "ImageViewController.h"
-#import "RibbitMessage.h"
-#import "File.h"
+
+// TJM - Backendless integration
+#import "BackendlessUser.h"
+#import "TJMMessage.h"
 
 @interface ImageViewController ()
 
@@ -19,25 +21,42 @@
 {
     [super viewDidLoad];
 	
-  File *imageFile = self.message.file;
-    NSData *imageData = [NSData dataWithContentsOfURL:imageFile.fileURL];
-    self.imageView.image = [UIImage imageWithData:imageData];
+    // TJM - Backendless integration
+    // TJM - fetch the file from the server
+    [self.activityIndicator startAnimating];
+    [self.activityIndicator setHidden:NO];
     
-    NSString *senderName = self.message.senderName;
+    NSURL *url = [NSURL URLWithString:self.message.file];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+    
+    NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+
+        if (error == nil) {
+            
+            NSData *imageData = [NSData dataWithContentsOfURL:location];
+            self.imageView.image = [UIImage imageWithData:imageData];
+            [self.activityIndicator stopAnimating];
+            [self.activityIndicator setHidden:YES];
+
+            if ([self respondsToSelector:@selector(timeout)]) {
+                [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(timeout) userInfo:nil repeats:NO];
+            }
+            else {
+                NSLog(@"Error: selector missing!");
+            }
+        }
+    }];
+    
+    [task resume];
+    
+    NSString *senderName = self.message.sender.name;
     NSString *title = [NSString stringWithFormat:@"Sent from %@", senderName];
     self.navigationItem.title = title;
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    if ([self respondsToSelector:@selector(timeout)]) {
-        [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(timeout) userInfo:nil repeats:NO];
-    }
-    else {
-        NSLog(@"Error: selector missing!");
-    }
-}
 
 #pragma mark - Helper methods
 

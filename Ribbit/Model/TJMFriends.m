@@ -1,6 +1,5 @@
 #import "Backendless.h"
 #import "TJMFriends.h"
-#import "BackendlessUser.h"
 
 @implementation TJMFriends
 

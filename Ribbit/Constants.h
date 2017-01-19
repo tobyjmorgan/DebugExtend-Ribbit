@@ -10,7 +10,6 @@
 // Copyright 2011 Parse, Inc. All rights reserved.
 
 #import <Foundation/Foundation.h>
-#import "User.h"
 
 extern NSString *const kPFDeviceType;
 

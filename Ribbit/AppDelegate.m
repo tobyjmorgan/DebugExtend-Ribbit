@@ -6,17 +6,14 @@
 //
 
 #import "AppDelegate.h"
-#import <Backendless/Backendless.h>
+#import "TJMModel.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // TJM - set up Backendless
-    [backendless initApp:@"F4DCDE2A-CF35-8B99-FFAF-E6B022C3C300" secret:@"F53ADE62-C1B3-6B0A-FF0B-79766AE4BC00" version:@"v1"];
-    
-    // If you plan to use Backendless Media Service, uncomment the following line (iOS ONLY!)
-    // backendless.mediaService = [MediaService new];
+    // TJM - cycle up the model as soon as possible
+    [TJMModel sharedInstance];
     
     // Thanks to buczek on StackOverflow
     // http://stackoverflow.com/questions/25845855/transparent-navigation-bar-ios

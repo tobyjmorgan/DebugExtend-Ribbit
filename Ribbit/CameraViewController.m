@@ -7,14 +7,24 @@
 
 #import "CameraViewController.h"
 #import <MobileCoreServices/UTCoreTypes.h>
-#import "User.h"
-#import "File.h"
-#import "RibbitMessage.h"
 #import "UIViewController+ShowErrorAlert.h"
 
 #import "FriendsCell.h"
 
+// TJM - Backendless integration
+#import "BackendlessUser.h"
+#import "TJMModel.h"
+#import "TJMMessage.h"
+#import "TJMFriends.h"
+
 @interface CameraViewController ()
+
+@property (nonatomic, strong) UIImagePickerController *imagePicker;
+@property (nonatomic, strong) UIImage *image;
+@property (nonatomic, strong) NSString *videoFilePath;
+
+
+@property (nonatomic, strong) NSMutableArray *recipients;
 
 @end
 
@@ -23,15 +33,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.recipients = [[NSMutableArray alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.friends = [[User currentUser] friends];
     [self.tableView reloadData];
-  
+    
+    [self updateSendButtonState];
+    
+    // launch image picker
     if (self.image == nil && [self.videoFilePath length] == 0) {
         self.imagePicker = [[UIImagePickerController alloc] init];
         self.imagePicker.delegate = self;
@@ -53,6 +66,18 @@
     }    
 }
 
+- (void)updateSendButtonState {
+    
+    if (self.recipients.count > 0) {
+        
+        self.sendButton.enabled = YES;
+
+    } else {
+        
+        self.sendButton.enabled = NO;
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -64,7 +89,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.friends count];
+    return [[[TJMModel sharedInstance] currentUsersFriends] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -72,10 +97,10 @@
     static NSString *CellIdentifier = @"FriendsCell";
     FriendsCell *cell = (FriendsCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    User *user = [self.friends objectAtIndex:indexPath.row];
-    cell.nameLabel.text = user.username;
+    BackendlessUser *user = [[[TJMModel sharedInstance] currentUsersFriends] objectAtIndex:indexPath.row];
+    cell.nameLabel.text = user.name;
     
-    if ([self.recipients containsObject:user.objectId]) {
+    if ([self.recipients containsObject:user]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     else {
@@ -92,16 +117,18 @@
     [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    User *user = [self.friends objectAtIndex:indexPath.row];
+    BackendlessUser *user = [[[TJMModel sharedInstance] currentUsersFriends] objectAtIndex:indexPath.row];
     
     if (cell.accessoryType == UITableViewCellAccessoryNone) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        [self.recipients addObject:user.objectId];
+        [self.recipients addObject:user];
     }
     else {
         cell.accessoryType = UITableViewCellAccessoryNone;
-        [self.recipients removeObject:user.objectId];
+        [self.recipients removeObject:user];
     }
+
+    [self updateSendButtonState];
 
     NSLog(@"%@", self.recipients);
 }
@@ -179,33 +206,12 @@
         fileType = @"video";
     }
     
-    File *file = [File fileWithName:fileName data:fileData];
-    [file saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (error) {
-            // TJM 1/12/2017 Bug Fix #5 - slightly better error reporting
-            NSString *message = [NSString stringWithFormat:@"%@\nPlease try sending your message again.", error.localizedDescription];
-            [self showErrorAlertWithTitle:@"An error occurred!"  andMessage:message];
-        }
-        else {
-            RibbitMessage *message = [[RibbitMessage alloc] init];
-            message.file = file;
-            message.fileType = fileType;
-            
-            // TJM 1/12/2017 Bug Fix #5 - don't want to keep a reference to this array, we want an equivalent array
-            message.recipients = [NSMutableArray arrayWithArray:self.recipients];
-            message.senderId = [[User currentUser] objectId];
-            message.senderName = [[User currentUser] username];
-          
-            [message saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                if (error) {
-                    [self showErrorAlertWithTitle:@"An error occurred!"  andMessage:@"Please try sending your message again."];
-                }
-                else {
-                    // Everything was successful!
-                    [self reset];
-                }
-            }];
-        }
+    [[TJMModel sharedInstance] sendMessagesForFileNamed:fileName withData:fileData fileType:fileType toRecipients:self.recipients error:^(NSString *errorMessage) {
+        
+        // TJM - notify the user what the error was
+        // TJM 1/12/2017 Bug Fix #5 - slightly better error reporting
+        NSString *message = [NSString stringWithFormat:@"%@\nPlease try sending your message again.", errorMessage];
+        [self showErrorAlertWithTitle:@"Sorry!" andMessage:message];
     }];
 }
 

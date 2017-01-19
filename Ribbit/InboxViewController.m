@@ -6,12 +6,8 @@
 //
 
 #import "InboxViewController.h"
-#import "ImageViewController.h"
-#import "RibbitMessage.h"
-#import "User.h"
-#import "App.h"
-#import "File.h"
 
+#import "ImageViewController.h"
 #import "InboxCell.h"
 
 // TJM 1/12/2017 Bug Fix #5 - replace deprecated MPMoviePlayer with AVPlayerViewController
@@ -19,10 +15,16 @@
 #import <AVKit/AVKit.h>
 
 // TJM - Backendless integration
-#import <Backendless/Backendless.h>
-
+#import "TJMModel.h"
+#import "TJMMessage.h"
+#import "BackendlessUser.h"
 
 @interface InboxViewController ()
+
+// TJM - Backendless integration
+@property (nonatomic, weak) TJMModel *model;
+
+@property (nonatomic, strong) TJMMessage *selectedMessage;
 
 @end
 
@@ -32,45 +34,27 @@
 {
     [super viewDidLoad];
 
+    self.model = [TJMModel sharedInstance];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:TJMModel_Messages_Refreshed object:self.model];
+    
     // TJM 1/12/2017 Bug Fix #5 - replace deprecated MPMoviePlayer with AVPlayerViewController
 //    self.moviePlayer = [[MPMoviePlayerController alloc] init];
-    
-    // TJM - validating current user with Backendless
-    @try { 
-        NSNumber *result = [backendless.userService isValidUserToken];
-        
-        if ([result boolValue] == YES) {
-            
-            NSLog(@"Current user: %@", [backendless.userService currentUser].name);
-
-        } else {
-            
-            [self performSegueWithIdentifier:@"showLogin" sender:self];
-        }
-    }
-    @catch (Fault *fault) {
-
-        // TJM - if there was an error validating the current user, just go to the login anyway
-        NSLog(@"FAULT (SYNC): %@", fault);
-        [self performSegueWithIdentifier:@"showLogin" sender:self];
-    }
-    
-//    User *currentUser = [User currentUser];
-//    if (currentUser) {
-//        NSLog(@"Current user: %@", currentUser.username);
-//    }
-//    else {
-//        [self performSegueWithIdentifier:@"showLogin" sender:self];
-//    }
-}
-
-- (NSArray *)messages {
-  return [[App currentApp] messages];
 }
 
 // TJM 1/12/2017 Bug Fix #5 - need to reload the view controller each time we return to this screen
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+
+    if (self.model.currentUser == nil) {
+            
+        [self performSegueWithIdentifier:@"showLogin" sender:self];
+    }
+
+    [self.tableView reloadData];
+}
+
+- (void)refresh {
     
     [self.tableView reloadData];
 }
@@ -86,7 +70,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[self messages] count];
+    return [self.model currentUsersMessages].count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -94,8 +78,8 @@
     static NSString *CellIdentifier = @"InboxCell";
     InboxCell *cell = (InboxCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    RibbitMessage *message = [[self messages] objectAtIndex:indexPath.row];
-    cell.senderNameLabel.text = message.senderName;
+    TJMMessage *message = [[self.model currentUsersMessages] objectAtIndex:indexPath.row];
+    cell.senderNameLabel.text = message.sender.name;
     
     NSString *fileType = message.fileType;
     if ([fileType isEqualToString:@"image"]) {
@@ -112,38 +96,39 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.selectedMessage = [[self messages] objectAtIndex:indexPath.row];
+    TJMMessage *message = [[self.model currentUsersMessages] objectAtIndex:indexPath.row];
+    self.selectedMessage = message;
     NSString *fileType = self.selectedMessage.fileType;
     if ([fileType isEqualToString:@"image"]) {
         [self performSegueWithIdentifier:@"showImage" sender:self];
     }
     else {
+        
         // File type is video
-        File *videoFile = self.selectedMessage.file;
         
         // TJM 1/12/2017 Bug Fix #5 - replace deprecated MPMoviePlayer with AVPlayerViewController
 //        self.moviePlayer.contentURL = videoFile.fileURL;
 //        [self.moviePlayer prepareToPlay];
 //        [self.moviePlayer thumbnailImageAtTime:0 timeOption:MPMovieTimeOptionNearestKeyFrame];
-//        
+        
 //        // Add it to the view controller so we can see it
 //        [self.view addSubview:self.moviePlayer.view];
 //        [self.moviePlayer setFullscreen:YES animated:YES];
         
-        AVPlayer *player = [AVPlayer playerWithURL:videoFile.fileURL];
+        NSURL *url = [NSURL URLWithString:message.file];
+        AVPlayer *player = [AVPlayer playerWithURL:url];
         AVPlayerViewController *playerViewController = [[AVPlayerViewController alloc] init];
         playerViewController.player = player;
         [self presentViewController:playerViewController animated:YES completion:nil];
     }
     
     // Delete it!
-    [[App currentApp] deleteMessage:self.selectedMessage];
+    [self.model removeMessage:message];
 }
 
 - (IBAction)logout:(id)sender {
-//    [User logOut];
-    // TJM - log out of Backendless
-    [backendless.userService logout];
+    
+    [self.model logOut];
     
     [self performSegueWithIdentifier:@"showLogin" sender:self];
 }

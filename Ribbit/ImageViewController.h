@@ -7,11 +7,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class RibbitMessage;
+@class TJMMessage;
 
 @interface ImageViewController : UIViewController
 
-@property (nonatomic, strong) RibbitMessage *message;
+@property (nonatomic, strong) TJMMessage *message;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end

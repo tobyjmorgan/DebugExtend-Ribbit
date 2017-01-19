@@ -7,19 +7,16 @@
 
 #import "FriendsViewController.h"
 #import "EditFriendsViewController.h"
-#import "App.h"
 
 #import "FriendsCell.h"
 
-// TJM - Backendless integration
-#import <Backendless/Backendless.h>
-#import "TJMFriends.h"
+#import "TJMModel.h"
+#import "BackendlessUser.h"
 
 @interface FriendsViewController ()
 
 // TJM - Backendless integration
-@property (nonatomic, strong) BackendlessUser *currentUser;
-@property (nonatomic, strong) TJMFriends *myFriends;
+@property (nonatomic, weak) TJMModel *model;
 
 @end
 
@@ -28,41 +25,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // TJM - Backendless integration
+    self.model = [TJMModel sharedInstance];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    // TJM - Backendless integration
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:TJMModel_Friends_Refreshed object:self.model];
 
-    self.currentUser = [backendless.userService currentUser];
+    [self.tableView reloadData];
+}
 
-    BackendlessDataQuery *friendsQuery = [BackendlessDataQuery query];
-    friendsQuery.whereClause = [NSString stringWithFormat:@"user.email = \'%@\'", self.currentUser.email];
+- (void)refresh {
     
-    @try {
-        BackendlessCollection *friendsCollection = [[backendless.persistenceService of:[TJMFriends class]] find:friendsQuery];
-        NSLog(@"friends collection: %@", friendsCollection);
-        
-        if (friendsCollection.data.count > 0) {
-            
-            self.myFriends = [friendsCollection.data firstObject];
-            [self.myFriends loadFriends];
-            
-        } else {
-            
-            self.myFriends = [[TJMFriends alloc] init];
-            self.myFriends.user = self.currentUser;
-            
-        }
-
-        [self.tableView reloadData];
-    }
-    @catch (Fault *fault) {
-        
-        NSLog(@"FAULT (SYNC): %@", fault);
-    }
-
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -76,7 +54,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.myFriends.friends count];
+    return [self.model currentUsersFriends].count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -84,7 +62,7 @@
     static NSString *CellIdentifier = @"FriendsCell";
     FriendsCell *cell = (FriendsCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    BackendlessUser *user = [self.myFriends.friends objectAtIndex:indexPath.row];
+    BackendlessUser *user = [[self.model currentUsersFriends] objectAtIndex:indexPath.row];
     cell.nameLabel.text = user.name;
     
     return cell;

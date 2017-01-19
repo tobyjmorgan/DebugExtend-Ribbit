@@ -7,14 +7,16 @@
 //
 
 #import "SignupViewController.h"
-#import "User.h"
+
 #import "UIViewController+ShowErrorAlert.h"
 
 // TJM - Backendless integration
-#import <Backendless/Backendless.h>
-
+#import "TJMModel.h"
 
 @interface SignupViewController ()
+
+// TJM - Backendless integration
+@property (nonatomic, weak) TJMModel *model;
 
 @end
 
@@ -23,7 +25,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+	
+    self.model = [TJMModel sharedInstance];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -53,21 +56,15 @@
     else {
         
         // TJM - attempt to create the new user in Backendless using email and password
-        BackendlessUser *user = [BackendlessUser new];
-        user.password = password;
-        [user setProperty:@"name" object:username];
-        [user setProperty:@"email" object:email];
+        [self.model signupNewUserWithName:username email:email andPassword:password completion:^(BackendlessUser *user) {
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+        error:^(NSString *errorMessage) {
         
-        [backendless.userService registering:user
-                                    response:^(BackendlessUser * _Nullable user) {
-                                        // TJM - all went well - now dismiss
-                                        [backendless.userService setCurrentUser:user];
-                                        [backendless.userService setStayLoggedIn:YES];
-                                        [self.navigationController popToRootViewControllerAnimated:YES];
-                                    } error:^(Fault * _Nullable fault) {
-                                        // TJM - notify the user what the error was
-                                        [self showErrorAlertWithTitle:@"Sorry!" andMessage:fault.message];
-                                    }];
+            // TJM - notify the user what the error was
+            [self showErrorAlertWithTitle:@"Sorry!" andMessage:errorMessage];
+        }];
     }
 }
 
