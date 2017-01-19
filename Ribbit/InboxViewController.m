@@ -46,6 +46,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
+    // if the current user is nil - go to the log in screen
     if (self.model.currentUser == nil) {
             
         [self performSegueWithIdentifier:@"showLogin" sender:self];

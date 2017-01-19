@@ -53,6 +53,7 @@ static TJMModel *singletonObject = nil;
 
         singletonObject = [super init];
         
+        // create these ahead of time for reuse
         self.friendsDataStore = [backendless.persistenceService of:[TJMFriends class]];
         self.messagesDataStore = [backendless.persistenceService of:[TJMMessage class]];
         
@@ -62,6 +63,7 @@ static TJMModel *singletonObject = nil;
             
             if ([result boolValue] == YES) {
                 
+                // user already logged in from previous app execution
                 self.currentUser = [backendless.userService currentUser];
                 NSLog(@"Current user: %@", self.currentUser.name);
                 
@@ -88,6 +90,7 @@ static TJMModel *singletonObject = nil;
 }
 ////////////////////////////////////////////////
 
+// overriding the currentUser setter so it can trigger refreshing all associated data
 - (void)setCurrentUser:(BackendlessUser *)currentUser {
     _currentUser = currentUser;
     
@@ -98,8 +101,8 @@ static TJMModel *singletonObject = nil;
     [self refreshModelForUserChange];
 }
 
+// refresh everything associated with the current user
 - (void)refreshModelForUserChange {
-    
     [self refresUsers];
     [self refreshFriends];
     [self refreshMessages];
@@ -110,6 +113,7 @@ static TJMModel *singletonObject = nil;
 
 #pragma mark Friend Management
 
+// fetches friends for current user
 - (void)refreshFriends {
     
     BackendlessDataQuery *friendsQuery = [BackendlessDataQuery query];
@@ -137,6 +141,7 @@ static TJMModel *singletonObject = nil;
     }];
 }
 
+// shields the consumer from the implementation of firends and prevents accidental changes to mutable array
 - (NSArray *)currentUsersFriends {
     
     return self.myFriends.friends;
@@ -165,9 +170,13 @@ static TJMModel *singletonObject = nil;
 
 - (void)saveFriends {
     
+    // save friends record to Backendless server
     [self.friendsDataStore save:self.myFriends response:^(id response) {
         
         TJMFriends *friend = (TJMFriends*)response;
+        
+        // needed so Backendless knows this is the same object
+        // otherwise it will create duplicate rows unecessarily
         self.myFriends.objectId = friend.objectId;
         
         NSLog(@"Friends list updated");
@@ -183,6 +192,7 @@ static TJMModel *singletonObject = nil;
 
 #pragma mark Message Management
 
+// fetches messages for current user
 - (void)refreshMessages {
     
     BackendlessDataQuery *messagesQuery = [BackendlessDataQuery query];
@@ -199,17 +209,21 @@ static TJMModel *singletonObject = nil;
     }];
 }
 
+// shields the consumer from the implementation of messages
 - (NSArray *)currentUsersMessages {
     return self.myMessages.data;
 }
 
+// creates a message for each recipient that is associated with the file being "sent"
+// in reality the file is uploaded to the server and referenced by each related message
 - (void)sendMessagesForFileNamed:(NSString *)fileName withData:(NSData *)data fileType:(NSString *)fileType toRecipients:(NSArray *)recipients error:(void(^)(NSString *))errorBlock {
     
     [backendless.fileService upload:fileName content:data response:^(BackendlessFile * _Nullable file) {
         
         // TJM - file successfully saved to Backendless
-        // TJM - now to save the message itself
+        // TJM - now to save the messages themselves
         
+        // iterate through the desired recipients
         for (BackendlessUser *recipient in recipients) {
             
             TJMMessage *newMessage = [[TJMMessage alloc] init];
@@ -227,6 +241,7 @@ static TJMModel *singletonObject = nil;
     }];
 }
 
+// delete the message from the server
 - (void)removeMessage:(TJMMessage *)message {
     
     [self.messagesDataStore remove:message response:^(NSNumber *number) {
@@ -240,6 +255,24 @@ static TJMModel *singletonObject = nil;
         
         NSLog(@"FAULT (SYNC): %@", fault);
     }];
+}
+
+// checks to see if there are any messages left that reference this file
+// if so marks the file for deletion at some point in the future
+// if it is deleted right away then it may intefere with displaying the image/video file
+- (void)removeOldFileIfOrphaned:(NSString *)urlString {
+    
+    BackendlessDataQuery *query = [BackendlessDataQuery query];
+    query.whereClause = [NSString stringWithFormat:@"file = \'%@\'", urlString];
+    BackendlessCollection *parents = [self.messagesDataStore find:query];
+    
+    if (parents.data.count == 0) {
+        
+        NSURL *url = [NSURL URLWithString:urlString];
+        NSString *fileName = (NSString *)url.lastPathComponent;
+        
+        [self markFileForDeletion:fileName];
+    }
 }
 
 - (void)markFileForDeletion:(NSString *)fileName {
@@ -257,6 +290,7 @@ static TJMModel *singletonObject = nil;
     }];
 }
 
+// cycles through all "marked for delete" rows and attempts to delete the associated files
 - (void)deleteOldFiles {
 
     [[backendless.persistenceService of:[TJMFileToDelete class]] find:^(BackendlessCollection *collection) {
@@ -287,26 +321,12 @@ static TJMModel *singletonObject = nil;
     }];
 }
 
-- (void)removeOldFileIfOrphaned:(NSString *)urlString {
-    
-    BackendlessDataQuery *query = [BackendlessDataQuery query];
-    query.whereClause = [NSString stringWithFormat:@"file = \'%@\'", urlString];
-    BackendlessCollection *parents = [self.messagesDataStore find:query];
-    
-    if (parents.data.count == 0) {
-        
-        NSURL *url = [NSURL URLWithString:urlString];
-        NSString *fileName = (NSString *)url.lastPathComponent;
-
-        [self markFileForDeletion:fileName];
-    }
-}
-
 
 
 
 #pragma mark User Management
 
+// fetches all users that are not the current user
 - (void)refresUsers {
     
     BackendlessDataQuery *allUsersQuery = [BackendlessDataQuery query];
@@ -366,6 +386,8 @@ static TJMModel *singletonObject = nil;
     [backendless.userService logout];
 }
 
+// sends a new password to the users email
+// ideally would have a change password screen - but got to draw the line on this project somewhere!!!
 - (void)passwordResetForEmail:(NSString *)email completion:(void(^)(void))completion error:(void(^)(NSString *))errorBlock {
     
     [backendless.userService restorePassword:email response:^(id willIgnore) {

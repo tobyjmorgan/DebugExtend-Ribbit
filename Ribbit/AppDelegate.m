@@ -12,7 +12,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // TJM - cycle up the model as soon as possible
+    // TJM - we are not using the model here, but just want to cycle it up as soon as possible
     [TJMModel sharedInstance];
     
     // Thanks to buczek on StackOverflow

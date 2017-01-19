@@ -19,6 +19,7 @@
 @property (nonatomic, strong) BackendlessUser *currentUser;
 @property (nonatomic, strong) NSArray *allUsers;
 
+// singleton model shared across app
 + sharedInstance;
 
 - (NSArray *)currentUsersFriends;
