@@ -36,17 +36,20 @@
 
         if (error == nil) {
             
-            NSData *imageData = [NSData dataWithContentsOfURL:location];
-            self.imageView.image = [UIImage imageWithData:imageData];
-            [self.activityIndicator stopAnimating];
-            [self.activityIndicator setHidden:YES];
-
-            if ([self respondsToSelector:@selector(timeout)]) {
-                [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(timeout) userInfo:nil repeats:NO];
-            }
-            else {
-                NSLog(@"Error: selector missing!");
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                NSData *imageData = [NSData dataWithContentsOfURL:location];
+                self.imageView.image = [UIImage imageWithData:imageData];
+                [self.activityIndicator stopAnimating];
+                [self.activityIndicator setHidden:YES];
+                
+                if ([self respondsToSelector:@selector(timeout)]) {
+                    [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(timeout) userInfo:nil repeats:NO];
+                }
+                else {
+                    NSLog(@"Error: selector missing!");
+                }
+            });
         }
     }];
     
