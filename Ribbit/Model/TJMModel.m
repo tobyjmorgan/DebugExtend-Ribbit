@@ -12,6 +12,7 @@
 #import <Backendless/Backendless.h>
 #import "TJMMessage.h"
 #import "TJMFriends.h"
+#import "TJMFileToDelete.h"
 
 @interface TJMModel ()
 
@@ -79,6 +80,8 @@ static TJMModel *singletonObject = nil;
             // no user logged in so make sure current user is set to nil
             self.currentUser = nil;
         }
+        
+        [self deleteOldFiles];
     }
     
     return singletonObject;
@@ -239,6 +242,51 @@ static TJMModel *singletonObject = nil;
     }];
 }
 
+- (void)markFileForDeletion:(NSString *)fileName {
+    
+    TJMFileToDelete *fileToDelete = [[TJMFileToDelete alloc] init];
+    fileToDelete.file = fileName;
+    
+    [[backendless.persistenceService of:[TJMFileToDelete class]] save:fileToDelete response:^(id response) {
+        
+        NSLog(@"File marked for deletion: %@", fileName);
+        
+    } error:^(Fault *fault) {
+        
+        NSLog(@"FAULT (SYNC): %@", fault);
+    }];
+}
+
+- (void)deleteOldFiles {
+
+    [[backendless.persistenceService of:[TJMFileToDelete class]] find:^(BackendlessCollection *collection) {
+        
+        for (TJMFileToDelete *fileToDelete in collection.data) {
+            
+            NSLog(@"Attempting to remove file: %@...", fileToDelete.file);
+            
+            [backendless.fileService
+             remove:fileToDelete.file
+             response:^(id result) {
+                 NSLog(@"File has been removed: result = %@", result);
+                 
+                 // now delete the marker record
+                 [[backendless.persistenceService of:[TJMFileToDelete class]] remove:fileToDelete response:^(NSNumber *result) {
+                     // marker deleted
+                 } error:^(Fault *fault) {
+                     NSLog(@"Server reported an error: %@", fault);
+                 }];
+             }
+             error:^(Fault *fault) {
+                 NSLog(@"Server reported an error: %@", fault);
+             }];
+        }
+        
+    } error:^(Fault *fault) {
+        NSLog(@"Server reported an error: %@", fault);
+    }];
+}
+
 - (void)removeOldFileIfOrphaned:(NSString *)urlString {
     
     BackendlessDataQuery *query = [BackendlessDataQuery query];
@@ -247,19 +295,10 @@ static TJMModel *singletonObject = nil;
     
     if (parents.data.count == 0) {
         
-        NSLog(@"\n============ Deleting file  with the ASYNC API ============");
-        
         NSURL *url = [NSURL URLWithString:urlString];
         NSString *fileName = (NSString *)url.lastPathComponent;
-        
-        [backendless.fileService
-         remove:fileName
-         response:^(id result) {
-             NSLog(@"File has been removed: result = %@", result);
-         }
-         error:^(Fault *fault) {
-             NSLog(@"Server reported an error: %@", fault);
-         }];
+
+        [self markFileForDeletion:fileName];
     }
 }
 
